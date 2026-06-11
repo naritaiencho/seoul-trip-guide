@@ -1,4 +1,15 @@
 import type { Restaurant } from './types'
+import { sisterPicks } from './sister'
+
+export const catLabel: Record<string, string> = {
+  imouto: '妹のお墨付き',
+  raw: '生レバー・ユッケ',
+  bbq: '焼肉・ホルモン',
+  soup: '鍋・スープ・麺',
+  cafe: 'カフェ・スイーツ',
+  night: '夜・お酒',
+  morning: '朝ごはん',
+}
 
 export const categories = [
   { id: 'all', label: 'すべて', emoji: '✦' },
@@ -400,3 +411,6 @@ export const restaurants: Restaurant[] = [
     url: 'https://www.konest.com/contents/gourmet_mise_detail.html?id=12821',
   },
 ]
+
+// 妹のお墨付きも含めた全店リスト（グルメ図鑑・しおりで共用）
+export const allRestaurants: Restaurant[] = [...sisterPicks, ...restaurants]

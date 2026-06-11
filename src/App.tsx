@@ -9,25 +9,32 @@ import Spots from './components/Spots'
 import Hotels from './components/Hotels'
 import Plans from './components/Plans'
 import Tips from './components/Tips'
+import Shiori from './components/Shiori'
+import FloatingShiori from './components/FloatingShiori'
 import Footer from './components/Footer'
+import { TripProvider } from './store/TripStore'
 
 export default function App() {
   return (
-    <div className="relative">
-      <Aurora />
-      <Nav />
-      <Hero />
-      <main>
-        <TripOverview />
-        <Areas />
-        <SisterPicks />
-        <Gourmet />
-        <Spots />
-        <Hotels />
-        <Plans />
-        <Tips />
-      </main>
-      <Footer />
-    </div>
+    <TripProvider>
+      <div className="relative">
+        <Aurora />
+        <Nav />
+        <Hero />
+        <main>
+          <TripOverview />
+          <Areas />
+          <SisterPicks />
+          <Gourmet />
+          <Spots />
+          <Hotels />
+          <Plans />
+          <Tips />
+          <Shiori />
+        </main>
+        <FloatingShiori />
+        <Footer />
+      </div>
+    </TripProvider>
   )
 }

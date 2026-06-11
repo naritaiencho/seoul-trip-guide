@@ -4,6 +4,7 @@ import {
 } from 'lucide-react'
 import Reveal from './Reveal'
 import SectionHeader from './SectionHeader'
+import MarkButtons from './MarkButtons'
 import { spots } from '../data/spots'
 
 const icons: Record<string, LucideIcon> = {
@@ -39,7 +40,10 @@ export default function Spots() {
                     <div className={`w-12 h-12 rounded-2xl flex items-center justify-center bg-white/5 border border-white/10 ${accentText[s.accent]} group-hover:scale-110 transition-transform duration-500`}>
                       <Icon size={22} />
                     </div>
-                    <span className="text-[11px] text-cream/40">{s.area}</span>
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-[11px] text-cream/40">{s.area}</span>
+                      <MarkButtons id={s.id} />
+                    </div>
                   </div>
 
                   <h3 className="mt-4 font-mincho font-bold text-lg lg:text-xl">{s.name}</h3>

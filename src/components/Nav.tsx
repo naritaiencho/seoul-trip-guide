@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, BookHeart } from 'lucide-react'
+import { useTrip } from '../store/TripStore'
 
 const links = [
   { href: '#overview', label: '旅の概要' },
@@ -15,6 +16,7 @@ const links = [
 export default function Nav() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const { favs } = useTrip()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -51,10 +53,16 @@ export default function Nav() {
         </nav>
 
         <a
-          href="#plans"
-          className="hidden lg:inline-block text-[13px] font-bold text-night bg-gradient-to-r from-gold via-blush to-violet px-5 py-2.5 rounded-full shadow-lg shadow-blush/25 hover:shadow-blush/50 hover:scale-105 transition-all duration-300"
+          href="#shiori"
+          className="hidden lg:inline-flex items-center gap-2 text-[13px] font-bold text-night bg-gradient-to-r from-gold via-blush to-violet px-5 py-2.5 rounded-full shadow-lg shadow-blush/25 hover:shadow-blush/50 hover:scale-105 transition-all duration-300"
         >
-          7.4 出発
+          <BookHeart size={15} />
+          しおり
+          {favs.length > 0 && (
+            <span className="bg-night text-cream text-[10px] font-bold min-w-[20px] h-5 px-1 rounded-full flex items-center justify-center">
+              {favs.length}
+            </span>
+          )}
         </a>
 
         <button
@@ -79,6 +87,19 @@ export default function Nav() {
                 {l.label}
               </a>
             ))}
+            <a
+              href="#shiori"
+              onClick={() => setOpen(false)}
+              className="py-3 px-4 rounded-xl font-mincho text-lg text-gold flex items-center gap-2"
+            >
+              <BookHeart size={18} />
+              ふたりのしおり
+              {favs.length > 0 && (
+                <span className="bg-gold text-night text-[11px] font-bold min-w-[20px] h-5 px-1 rounded-full flex items-center justify-center">
+                  {favs.length}
+                </span>
+              )}
+            </a>
           </nav>
         </div>
       )}

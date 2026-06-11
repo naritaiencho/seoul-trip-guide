@@ -2,8 +2,9 @@ import { useState } from 'react'
 import { Crown, MapPin, Clock, Wallet, ExternalLink, Lightbulb, Heart, UtensilsCrossed } from 'lucide-react'
 import Reveal from './Reveal'
 import SectionHeader from './SectionHeader'
-import { restaurants, categories } from '../data/gourmet'
-import { sisterPicks } from '../data/sister'
+import MarkButtons from './MarkButtons'
+import { categories, allRestaurants, catLabel } from '../data/gourmet'
+import { useTrip } from '../store/TripStore'
 
 const accentText: Record<string, string> = {
   gold: 'text-gold',
@@ -20,22 +21,13 @@ const catColor: Record<string, string> = {
   night: 'bg-gold/15 text-gold border-gold/30',
   morning: 'bg-teal/15 text-teal border-teal/30',
 }
-const catLabel: Record<string, string> = {
-  imouto: '妹のお墨付き',
-  raw: '生レバー・ユッケ',
-  bbq: '焼肉・ホルモン',
-  soup: '鍋・スープ・麺',
-  cafe: 'カフェ・スイーツ',
-  night: '夜・お酒',
-  morning: '朝ごはん',
-}
-
-// 妹のお墨付きもグルメ図鑑に統合表示する
-const allRestaurants = [...sisterPicks, ...restaurants]
-
 export default function Gourmet() {
   const [cat, setCat] = useState('all')
-  const filtered = cat === 'all' ? allRestaurants : allRestaurants.filter((r) => r.category === cat)
+  const [favOnly, setFavOnly] = useState(false)
+  const { favs } = useTrip()
+  const favCount = allRestaurants.filter((r) => favs.includes(r.id)).length
+  const byCat = cat === 'all' ? allRestaurants : allRestaurants.filter((r) => r.category === cat)
+  const filtered = favOnly ? byCat.filter((r) => favs.includes(r.id)) : byCat
 
   return (
     <section id="gourmet" className="relative py-20 lg:py-28">
@@ -92,14 +84,34 @@ export default function Gourmet() {
                 {c.label}
               </button>
             ))}
+            <button
+              onClick={() => setFavOnly(!favOnly)}
+              className={`px-4 py-2.5 rounded-full text-[13px] font-bold border transition-all duration-300 inline-flex items-center gap-1.5 ${
+                favOnly
+                  ? 'bg-blush text-night border-blush shadow-lg shadow-blush/30 scale-105'
+                  : 'bg-white/4 text-cream/70 border-white/10 hover:border-blush/50 hover:text-blush'
+              }`}
+            >
+              <Heart size={13} className={favOnly ? 'fill-current' : ''} />
+              行きたい！だけ{favCount > 0 && `（${favCount}）`}
+            </button>
           </div>
         </Reveal>
+
+        {favOnly && filtered.length === 0 && (
+          <p className="text-center text-cream/50 text-sm py-12">
+            まだ「行きたい！」がありません。気になるお店のカード右上の ♥ をタップしてみて。
+          </p>
+        )}
 
         {/* cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
           {filtered.map((r, i) => (
             <Reveal key={r.id} delay={(i % 3) * 80} className="h-full">
-              <article className="liquid-glass rounded-3xl overflow-hidden h-full flex flex-col hover:scale-[1.03] hover:-translate-y-1.5 transition-all duration-500 group">
+              <article className="relative liquid-glass rounded-3xl overflow-hidden h-full flex flex-col hover:scale-[1.03] hover:-translate-y-1.5 transition-all duration-500 group">
+                <div className="absolute top-3 right-3 z-10">
+                  <MarkButtons id={r.id} />
+                </div>
                 {r.img && (
                   <div className="relative h-44 overflow-hidden shrink-0">
                     <img
@@ -112,7 +124,7 @@ export default function Gourmet() {
                   </div>
                 )}
                 <div className="p-5 lg:p-6 flex flex-col flex-1">
-                  <div className="flex items-center gap-2 flex-wrap">
+                  <div className={`flex items-center gap-2 flex-wrap ${r.img ? '' : 'pr-20'}`}>
                     {!('sisterQuote' in r) && (
                       <span className={`text-[10px] font-bold px-2.5 py-1 rounded-full border ${catColor[r.category]}`}>
                         {catLabel[r.category]}

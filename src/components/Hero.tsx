@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Plane, MapPin, Sparkles, UtensilsCrossed } from 'lucide-react'
+import { useTrip } from '../store/TripStore'
+import { hotels } from '../data/hotels'
 
 const DEPARTURE = new Date('2026-07-04T12:00:00+09:00').getTime()
 
@@ -29,6 +31,8 @@ const particles = Array.from({ length: 18 }, (_, i) => ({
 
 export default function Hero() {
   const { days, hours, mins, secs } = useCountdown()
+  const { hotelId } = useTrip()
+  const stay = hotels.find((h) => h.id === hotelId)
   const bgRef = useRef<HTMLDivElement>(null)
   const cardRef = useRef<HTMLDivElement>(null)
   const glareRef = useRef<HTMLDivElement>(null)
@@ -202,7 +206,13 @@ export default function Hero() {
               </div>
               <div className="mt-6 flex items-center gap-2 text-xs text-cream/55">
                 <MapPin size={13} className="text-teal" />
-                BASE CAMP : 弘大 HONGDAE（妹のお墨付き）
+                {stay ? (
+                  <span>
+                    STAY : <span className="text-gold font-bold">{stay.name}</span>
+                  </span>
+                ) : (
+                  'BASE CAMP : 弘大 HONGDAE（妹のお墨付き）'
+                )}
               </div>
             </div>
           </div>

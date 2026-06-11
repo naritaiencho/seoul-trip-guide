@@ -1,7 +1,8 @@
-import { BedDouble, MapPin, Star, ExternalLink, Trophy } from 'lucide-react'
+import { BedDouble, MapPin, Star, ExternalLink, Trophy, KeyRound, PartyPopper, X } from 'lucide-react'
 import Reveal from './Reveal'
 import SectionHeader from './SectionHeader'
 import { hotels, hotelAreaCompare } from '../data/hotels'
+import { useTrip } from '../store/TripStore'
 
 const accentText: Record<string, string> = {
   gold: 'text-gold',
@@ -12,9 +13,37 @@ const accentText: Record<string, string> = {
 
 const rankBadge = ['🥇 第1候補', '🥈 第2候補', '🥉 第3候補']
 
+// 「ここに泊まる」決定ボタン
+function DecideButton({ id }: { id: string }) {
+  const { hotelId, decideHotel } = useTrip()
+  const decided = hotelId === id
+  return (
+    <button
+      onClick={() => decideHotel(decided ? null : id)}
+      className={`mt-4 w-full inline-flex items-center justify-center gap-2 text-[13px] font-bold px-4 py-3 rounded-2xl border transition-all duration-300 active:scale-95 ${
+        decided
+          ? 'bg-gradient-to-r from-gold to-blush text-night border-transparent shadow-lg shadow-gold/30'
+          : 'bg-white/4 text-cream/80 border-white/15 hover:border-gold/60 hover:text-gold'
+      }`}
+    >
+      {decided ? (
+        <>
+          <PartyPopper size={15} /> ここに泊まる！（決定済み）
+        </>
+      ) : (
+        <>
+          <KeyRound size={15} /> ここに泊まる
+        </>
+      )}
+    </button>
+  )
+}
+
 export default function Hotels() {
   const picks = hotels.filter((h) => h.pick)
   const others = hotels.filter((h) => !h.pick)
+  const { hotelId, decideHotel } = useTrip()
+  const decidedHotel = hotels.find((h) => h.id === hotelId)
 
   return (
     <section id="hotels" className="relative py-20 lg:py-28">
@@ -26,6 +55,27 @@ export default function Hotels() {
           desc="予算は1人8,000〜15,000円／泊。土曜泊は高く日曜泊は安いので「2泊平均」で見るのがコツ。今は無料キャンセル可で仮押さえ→直前に最安を取り直すのが鉄則。"
           grad="text-grad-gold"
         />
+
+        {decidedHotel && (
+          <Reveal>
+            <div className="relative overflow-hidden rounded-3xl mb-8 border border-gold/40 bg-gradient-to-r from-gold/15 via-night2 to-blush/10">
+              <div className="p-5 lg:p-6 flex items-center gap-4 flex-wrap">
+                <PartyPopper size={28} className="text-gold shrink-0" />
+                <div className="flex-1 min-w-[200px]">
+                  <p className="text-[11px] tracking-[0.25em] text-gold font-bold">OUR STAY — 宿泊先 決定！</p>
+                  <p className="font-mincho font-bold text-xl lg:text-2xl mt-1">{decidedHotel.name}</p>
+                  <p className="text-xs text-cream/60 mt-1">{decidedHotel.station}／{decidedHotel.price}</p>
+                </div>
+                <button
+                  onClick={() => decideHotel(null)}
+                  className="inline-flex items-center gap-1.5 text-xs text-cream/55 border border-white/15 px-3.5 py-2 rounded-full hover:border-cream/40 hover:text-cream transition-all duration-300"
+                >
+                  <X size={12} /> 選び直す
+                </button>
+              </div>
+            </div>
+          </Reveal>
+        )}
 
         <Reveal>
           <div className="relative overflow-hidden rounded-3xl mb-12">
@@ -50,7 +100,7 @@ export default function Hotels() {
         <div className="grid md:grid-cols-3 gap-5 lg:gap-6 mb-12">
           {picks.map((h, i) => (
             <Reveal key={h.id} delay={i * 100} className="h-full">
-              <article className="relative liquid-glass rounded-3xl p-6 lg:p-7 h-full flex flex-col hover:scale-[1.03] hover:-translate-y-2 transition-all duration-500 border-t-2 border-gold/30">
+              <article className={`relative liquid-glass rounded-3xl p-6 lg:p-7 h-full flex flex-col hover:scale-[1.03] hover:-translate-y-2 transition-all duration-500 border-t-2 border-gold/30 ${hotelId === h.id ? 'ring-2 ring-gold shadow-2xl shadow-gold/20' : ''}`}>
                 <span className="absolute -top-3.5 left-5 text-[11px] font-bold px-3 py-1.5 rounded-full bg-gradient-to-r from-gold to-blush text-night shadow-lg">
                   {rankBadge[i]}
                 </span>
@@ -84,6 +134,7 @@ export default function Hotels() {
                     空室をチェック <ExternalLink size={11} />
                   </a>
                 )}
+                <DecideButton id={h.id} />
               </article>
             </Reveal>
           ))}
@@ -98,7 +149,7 @@ export default function Hotels() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-14">
           {others.map((h, i) => (
             <Reveal key={h.id} delay={(i % 3) * 80} className="h-full">
-              <article className="liquid-glass rounded-3xl p-6 h-full flex flex-col hover:scale-[1.02] transition-all duration-500">
+              <article className={`liquid-glass rounded-3xl p-6 h-full flex flex-col hover:scale-[1.02] transition-all duration-500 ${hotelId === h.id ? 'ring-2 ring-gold shadow-2xl shadow-gold/20' : ''}`}>
                 <div className="flex items-center justify-between">
                   <span className={`text-[11px] font-bold ${accentText[h.accent]}`}>{h.area}</span>
                   {h.rating && (
@@ -116,6 +167,7 @@ export default function Hotels() {
                     空室をチェック <ExternalLink size={10} />
                   </a>
                 )}
+                <DecideButton id={h.id} />
               </article>
             </Reveal>
           ))}

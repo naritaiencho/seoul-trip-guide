@@ -14,6 +14,13 @@ const icons: Record<string, LucideIcon> = {
 const dayAccent = ['text-gold', 'text-blush', 'text-teal']
 const dayDot = ['bg-gold', 'bg-blush', 'bg-teal']
 
+// 旅行当日（7/4〜7/6 KST）はその日のカードにTODAYバッジを出す
+const TRIP_DAY_DATES = ['2026-07-04', '2026-07-05', '2026-07-06']
+function todayIndex(): number {
+  const now = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10)
+  return TRIP_DAY_DATES.indexOf(now)
+}
+
 export default function Plans() {
   const [active, setActive] = useState(plans[0].id)
   const plan = plans.find((p) => p.id === active) ?? plans[0]
@@ -53,9 +60,19 @@ export default function Plans() {
 
           <div className="grid lg:grid-cols-3 gap-6 lg:gap-7">
             {plan.days.map((d, di) => (
-              <div key={d.day} className="liquid-glass rounded-3xl p-6 lg:p-7">
+              <div
+                key={d.day}
+                className={`liquid-glass rounded-3xl p-6 lg:p-7 ${todayIndex() === di ? 'ring-2 ring-blush shadow-2xl shadow-blush/20' : ''}`}
+              >
                 <div className="flex items-baseline justify-between mb-1">
-                  <h3 className={`font-display font-black text-2xl ${dayAccent[di]}`}>{d.day}</h3>
+                  <h3 className={`font-display font-black text-2xl ${dayAccent[di]} flex items-center gap-2`}>
+                    {d.day}
+                    {todayIndex() === di && (
+                      <span className="text-[10px] font-body font-bold tracking-[0.2em] bg-blush text-night px-2.5 py-1 rounded-full animate-pulse">
+                        TODAY
+                      </span>
+                    )}
+                  </h3>
                   <span className="font-display italic text-sm text-cream/45 tracking-widest">{d.date}</span>
                 </div>
                 <p className="font-mincho font-semibold text-cream/85 mb-6">{d.label}</p>
