@@ -13,7 +13,7 @@ const facts = [
   {
     icon: Users,
     label: '旅のメンバー',
-    value: '35歳の彼 × 同世代の彼女',
+    value: '30代の男女',
     note: '2人とも初めての韓国',
     accent: 'text-gold',
   },
