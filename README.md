@@ -1,73 +1,23 @@
-# React + TypeScript + Vite
+# SEOUL for Two — 2泊3日ふたりの韓国ガイド
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+2026.7.4(土)昼 〜 7.6(月)昼過ぎ、35歳男性＋同世代女性の「初めての韓国」専用ガイドサイト。
 
-Currently, two official plugins are available:
+## 起動
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev    # http://localhost:5173
+npm run build  # dist/ に静的ビルド
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 構成
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- `src/data/` — リサーチ済みコンテンツ（エリア・グルメ30軒・観光12スポット・ホテル8軒・モデルプラン2種・Tips）
+- `src/components/` — セクションコンポーネント
+- `public/img/` — GPT Image 2（codex exec）で生成した統一スタイルのイラスト20枚（WebP）
+- `research/` — Webリサーチの一次情報メモ（営業時間・価格の根拠）
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## コンテンツの注意
+
+料金・営業時間は2026年6月時点のWebリサーチ値。訪問直前にNAVER Map等で最新情報の確認を推奨。
+特にクンソンチッ（エゴマユッケジャン）は **日曜定休・土曜15時まで** なので月曜朝が本命。
