@@ -29,7 +29,7 @@ export default function Plans() {
     <section id="plans" className="relative py-20 lg:py-28">
       <div className="max-w-7xl mx-auto px-5 lg:px-10">
         <SectionHeader
-          num="07"
+          num="08"
           en="Model Plans"
           ja="ゆるっとモデルプラン"
           desc="ガチガチに固めない、でも迷わない。2パターン用意したので、当日の天気と気分でいいとこ取りしてOK。"

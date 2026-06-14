@@ -117,7 +117,7 @@ export default function Shiori() {
       />
       <div className="relative max-w-7xl mx-auto px-5 lg:px-10">
         <SectionHeader
-          num="09"
+          num="10"
           en="Trip Booklet"
           ja="ふたりのしおり"
           desc="♥をつけた店・スポットと決めた宿が、ここに自動で集まる。コピーしてLINEで共有もできる、ふたり専用の旅のダッシュボード。"

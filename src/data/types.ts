@@ -33,6 +33,19 @@ export interface Restaurant {
   featured?: boolean
 }
 
+export interface Street {
+  id: string
+  name: string
+  nameKr: string
+  specialty: string // 何の専門店通りか
+  area: string
+  station: string
+  desc: string
+  foods: string[]
+  img: string
+  accent: Accent
+}
+
 export interface Spot {
   id: string
   name: string

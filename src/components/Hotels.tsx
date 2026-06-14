@@ -49,7 +49,7 @@ export default function Hotels() {
     <section id="hotels" className="relative py-20 lg:py-28">
       <div className="max-w-7xl mx-auto px-5 lg:px-10">
         <SectionHeader
-          num="06"
+          num="07"
           en="Stay"
           ja="ホテル候補"
           desc="予算は1人8,000〜15,000円／泊。土曜泊は高く日曜泊は安いので「2泊平均」で見るのがコツ。今は無料キャンセル可で仮押さえ→直前に最安を取り直すのが鉄則。"

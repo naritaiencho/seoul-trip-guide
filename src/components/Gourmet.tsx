@@ -140,6 +140,11 @@ export default function Gourmet() {
                         ★ 本命
                       </span>
                     )}
+                    {r.sister && !('sisterQuote' in r) && (
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2.5 py-1 rounded-full bg-gold/20 text-gold border border-gold/40">
+                        <Crown size={10} /> 妹おすすめ
+                      </span>
+                    )}
                   </div>
 
                   <h3 className="mt-3 font-mincho font-bold text-lg leading-snug">{r.name}</h3>

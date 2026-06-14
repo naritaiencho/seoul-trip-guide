@@ -7,6 +7,7 @@ const links = [
   { href: '#areas', label: 'エリア' },
   { href: '#sister', label: '妹のお墨付き' },
   { href: '#gourmet', label: 'グルメ' },
+  { href: '#streets', label: '専門店通り' },
   { href: '#spots', label: '観光' },
   { href: '#hotels', label: 'ホテル' },
   { href: '#plans', label: 'プラン' },

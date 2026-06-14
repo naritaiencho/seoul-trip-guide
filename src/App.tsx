@@ -5,6 +5,7 @@ import TripOverview from './components/TripOverview'
 import Areas from './components/Areas'
 import SisterPicks from './components/SisterPicks'
 import Gourmet from './components/Gourmet'
+import Streets from './components/Streets'
 import Spots from './components/Spots'
 import Hotels from './components/Hotels'
 import Plans from './components/Plans'
@@ -26,6 +27,7 @@ export default function App() {
           <Areas />
           <SisterPicks />
           <Gourmet />
+          <Streets />
           <Spots />
           <Hotels />
           <Plans />

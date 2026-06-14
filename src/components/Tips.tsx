@@ -1,5 +1,5 @@
 import {
-  TrainFront, Wallet, Smartphone, CloudRain, HandHeart, MessageCircleHeart, TicketsPlane, ShieldAlert,
+  TrainFront, Wallet, Smartphone, CloudRain, HandHeart, MessageCircleHeart, TicketsPlane, ShieldAlert, CarTaxiFront,
   type LucideIcon,
 } from 'lucide-react'
 import Reveal from './Reveal'
@@ -7,7 +7,7 @@ import SectionHeader from './SectionHeader'
 import { tips, souvenirs } from '../data/tips'
 
 const icons: Record<string, LucideIcon> = {
-  TrainFront, Wallet, Smartphone, CloudRain, HandHeart, MessageCircleHeart, TicketsPlane, ShieldAlert,
+  TrainFront, Wallet, Smartphone, CloudRain, HandHeart, MessageCircleHeart, TicketsPlane, ShieldAlert, CarTaxiFront,
 }
 
 const accentText: Record<string, string> = {
@@ -22,7 +22,7 @@ export default function Tips() {
     <section id="tips" className="relative py-20 lg:py-28">
       <div className="max-w-7xl mx-auto px-5 lg:px-10">
         <SectionHeader
-          num="08"
+          num="09"
           en="Travel Tips"
           ja="基本情報 & Tips"
           desc="初めての韓国で「知らなかった」を無くすための実用情報。出発前にこのセクションだけ2人で読み合わせておけば大丈夫。"

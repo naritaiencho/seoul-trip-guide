@@ -23,7 +23,7 @@ export default function Spots() {
     <section id="spots" className="relative py-20 lg:py-28">
       <div className="max-w-7xl mx-auto px-5 lg:px-10">
         <SectionHeader
-          num="05"
+          num="06"
           en="Sightseeing & Experience"
           ja="観光・体験スポット"
           desc="2泊3日で全部は回れない。だから「営業時間・料金・所要時間」まで揃えた。当日の気分で取捨選択できるのが、ふたり旅のいいところ。"

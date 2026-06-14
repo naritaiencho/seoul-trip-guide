@@ -1,4 +1,4 @@
-import { Crown, Quote, BadgeCheck, MapPin, Clock, Wallet, ExternalLink, Lightbulb, Route } from 'lucide-react'
+import { Crown, Quote, BadgeCheck, MapPin, Clock, Wallet, ExternalLink, Lightbulb, Route, Plane } from 'lucide-react'
 import Reveal from './Reveal'
 import SectionHeader from './SectionHeader'
 import { sisterPicks, sisterRouteNote } from '../data/sister'
@@ -29,7 +29,7 @@ export default function SisterPicks() {
           num="03"
           en="Sister's Selection"
           ja="妹のお墨付き"
-          desc="韓国マスターの妹が「これは間違いない」と太鼓判を押した4選。全店リサーチ済み——口コミの裏付けも取れた、この旅の軸になる店たち。"
+          desc="渡韓40回超の韓国マスターの妹が「これは間違いない」と太鼓判を押した4選。全店リサーチ済み——口コミの裏付けも取れた、この旅の軸になる店たち。"
           grad="text-grad-gold"
         />
 
@@ -52,7 +52,12 @@ export default function SisterPicks() {
                 <br className="hidden lg:block" />
                 ご飯はこの4つ、ぜったい外さんといて！
               </p>
-              <p className="mt-2 text-xs text-cream/45 tracking-widest">— 韓国通の妹より</p>
+              <div className="mt-3 flex items-center gap-2 flex-wrap">
+                <span className="inline-flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-full bg-gold/15 text-gold border border-gold/30">
+                  <Plane size={11} /> 渡韓40〜50回の韓国通
+                </span>
+                <span className="text-xs text-cream/45 tracking-widest">— 妹より</span>
+              </div>
             </div>
           </div>
         </Reveal>
